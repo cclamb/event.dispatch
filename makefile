@@ -12,7 +12,9 @@ MODS = client_node_engine \
 	client_node_supervisor \
 	local_handler \
 	remote_handler \
-	communication_server
+	communication_server \
+	command_server \
+	command_handler
 	
 all: compile
 

@@ -4,6 +4,6 @@
    {modules, [client_node_engine, remote_handler, local_handler, client_node_supervisor, communication_server]},
    {registered, [communication_server]},
    {applications, [kernel, stdlib]},
-   {mod, {client_node_engine, []}},
+   {mod, {client_node_engine, [foobar]}},
    {start_phases, []}
 ]}.

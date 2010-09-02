@@ -6,7 +6,7 @@ init(_Args) ->
     {ok, []}.
 
 handle_event(ErrorMsg, State) ->
-    io:format("*** transmitting to control node *** ~p~n", [ErrorMsg]),
+    io:format("*** transmitting to control node *** ~p~n", [{ErrorMsg, State}]),
 	rpc:call(foo@s907454, command_server, call, [{event, ErrorMsg}]),
     {ok, State}.
 

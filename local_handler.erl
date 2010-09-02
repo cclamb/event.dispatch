@@ -3,11 +3,11 @@
 -export([init/1, handle_event/2, terminate/2, code_change/3, handle_call/2, handle_info/2]).
 
 init(_Args) ->
-    {ok, []}.
+    {ok, _Args}.
 
 handle_event(ErrorMsg, State) ->
 	%[CommandHost | _] = State,
-    io:format("*** handling locally *** ~p~n", [{ErrorMsg, bar}]),
+    io:format("*** handling locally *** ~p~n", [{ErrorMsg, State}]),
     {ok, State}.
 
 terminate(_Args, _State) ->

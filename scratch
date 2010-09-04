@@ -3,3 +3,5 @@ rr("event_descriptor.hrl"). application:load(client_node). application:start(cli
 
 
 command_server:start().
+
+communication_server:register(foo@fawkes).

@@ -18,13 +18,13 @@ handle_call(stop, _From, N) ->
 	io:format("*** stopping *** ~p~n", [?MODULE]),
 	{stop, normal, stopped, N + 1}.
 
-handle_cast({register, CncHost}, N) ->
+handle_cast({register, CncHost}, SeqNum) ->
 	io:format("*** registering with CNC *** ~p~n", [CncHost]),
   Msg = #command_descriptor{originating_host=bar@fawkes,
       destination_host=CncHost,
-      id = N},
+      id = SeqNum},
   rpc:call(CncHost, command_server, call, [{register, Msg}]),
-	{noreply, N + 1};
+	{noreply, SeqNum + 1};
 handle_cast({call, Packet}, N) ->
 	io:format("*** call from CNC *** ~p~n", [Packet]),
 	{noreply, N + 1}.

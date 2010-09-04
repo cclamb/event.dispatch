@@ -1,0 +1,13 @@
+
+client_node:
+----
+X We need to increment and store id numbers on packets (com server will maintain
+one count, remote handler another, so we'll maintain counts per message type)
+* we need to pass the event manager name through the arg list in the app
+* we need to be able to pull the nodename from the erlang node
+* pass servername/function into handlers also
+
+command_node:
+----
+* need to port client_node code to command node
+

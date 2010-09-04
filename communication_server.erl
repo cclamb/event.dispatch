@@ -1,4 +1,5 @@
 -module(communication_server).
+-include("command_descriptor.hrl").
 -behaviour(gen_server).
 -export([start/0, stop/0, register/1, call/1]).
 -export([init/1, handle_call/3, handle_cast/2, handle_info/2, terminate/2, code_change/3]).
@@ -19,6 +20,10 @@ handle_call(stop, _From, N) ->
 
 handle_cast({register, CncHost}, N) ->
 	io:format("*** registering with CNC *** ~p~n", [CncHost]),
+  Msg = #command_descriptor{originating_host=bar@fawkes,
+      destination_host=CncHost,
+      id = 1},
+  rpc:call(CncHost, command_server, call, [{register, Msg}]),
 	{noreply, N + 1};
 handle_cast({call, Packet}, N) ->
 	io:format("*** call from CNC *** ~p~n", [Packet]),

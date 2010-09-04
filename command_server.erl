@@ -16,6 +16,9 @@ loop(CommandHandler) ->
 			io:format("command_server delegating event...~p~n", [Payload]),
 			CommandHandler ! {event, Payload},
 			loop(CommandHandler);
+    {register, Payload} ->
+			io:format("command_server handling registration...~p~n", [Payload]),
+			loop(CommandHandler);
 		Other ->
 			io:format("command_server other match: ~p~n", [Other]),
 			loop(CommandHandler)

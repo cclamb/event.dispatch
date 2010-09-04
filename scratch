@@ -1,0 +1,5 @@
+rr("event_descriptor.hrl"). application:load(client_node). application:start(client_node). gen_event:notify(event_manager, #event_descriptor{originating_host=bar@fawkes, id=1, message="frankly"}).
+
+
+
+command_server:start().

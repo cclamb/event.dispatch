@@ -4,6 +4,6 @@
    {modules, [client_node_engine, remote_handler, local_handler, client_node_supervisor, communication_server]},
    {registered, [communication_server]},
    {applications, [kernel, stdlib]},
-   {mod, {client_node_engine, [freakshow]}},
+   {mod, {client_node_engine, [foo@fawkes]}},
    {start_phases, []}
 ]}.

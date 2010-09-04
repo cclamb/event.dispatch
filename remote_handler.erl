@@ -3,11 +3,12 @@
 -export([init/1, handle_event/2, terminate/2, code_change/3, handle_call/2, handle_info/2]).
 
 init(_Args) ->
-    {ok, []}.
+    {ok, _Args}.
 
 handle_event(ErrorMsg, State) ->
-    io:format("*** transmitting to control node *** ~p~n", [{ErrorMsg, State}]),
-	rpc:call(foo@s907454, command_server, call, [{event, ErrorMsg}]),
+    [CommandHost|_] = State,
+    io:format("*** transmitting to control node *** ~p~n", [{ErrorMsg, CommandHost}]),
+	  rpc:call(CommandHost, command_server, call, [{event, ErrorMsg}]),
     {ok, State}.
 
 terminate(_Args, _State) ->

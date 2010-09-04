@@ -6,7 +6,7 @@ start(_Type, StartArgs) ->
 	[CommandHost | LinkArgs] = StartArgs,
 	io:format("*** starting application *** ~p~n", [?MODULE]),
 	Retval = client_node_supervisor:start_link(LinkArgs),
-	gen_event:add_handler(event_manager, remote_handler, []),
+	gen_event:add_handler(event_manager, remote_handler, [CommandHost]),
 	gen_event:add_handler(event_manager, local_handler, [CommandHost]),
 	communication_server:register(CommandHost),
 	Retval.

@@ -6,8 +6,8 @@ init(_Args) ->
     {ok, _Args}.
 
 handle_event(ErrorMsg, State) ->
-	%[CommandHost | _] = State,
-    io:format("*** handling locally *** ~p~n", [{ErrorMsg, State}]),
+	  [CommandHost|_] = State,
+    io:format("*** handling locally *** ~p~n", [{ErrorMsg, CommandHost}]),
     {ok, State}.
 
 terminate(_Args, _State) ->

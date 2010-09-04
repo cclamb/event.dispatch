@@ -3,11 +3,11 @@
 -export([start/2, stop/1]).
 
 start(_Type, StartArgs) ->
-	[CommandHost | LinkArgs] = StartArgs,
+	[CommandHost, EventManager | LinkArgs] = StartArgs,
 	io:format("*** starting application *** ~p~n", [?MODULE]),
 	Retval = client_node_supervisor:start_link(LinkArgs),
-	gen_event:add_handler(event_manager, remote_handler, [CommandHost]),
-	gen_event:add_handler(event_manager, local_handler, [CommandHost]),
+	gen_event:add_handler(EventManager, remote_handler, [CommandHost]),
+	gen_event:add_handler(EventManager, local_handler, [CommandHost]),
 	communication_server:register(CommandHost),
 	Retval.
 	

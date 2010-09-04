@@ -12,7 +12,7 @@ call(Packet)		-> gen_server:cast(?MODULE, {call, Packet}).
 
 init([]) ->
 	io:format("*** init on CNC *** ~p~n", [?MODULE]),
-	{ok, 0}.
+	{ok, 1}.
 
 handle_call(stop, _From, N) ->
 	io:format("*** stopping *** ~p~n", [?MODULE]),
@@ -22,7 +22,7 @@ handle_cast({register, CncHost}, N) ->
 	io:format("*** registering with CNC *** ~p~n", [CncHost]),
   Msg = #command_descriptor{originating_host=bar@fawkes,
       destination_host=CncHost,
-      id = 1},
+      id = N},
   rpc:call(CncHost, command_server, call, [{register, Msg}]),
 	{noreply, N + 1};
 handle_cast({call, Packet}, N) ->

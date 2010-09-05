@@ -1,0 +1,72 @@
+event.dispatch
+---
+A group of applications supporting distributed event handling and retention.
+It capitalizes on OTP for hot deployment, communication, and process management.
+
+To build
+----
+Currently the build file is simple, supporting build and clean targets.
+To build:
+
+$ make
+
+To clean:
+
+$ make clean
+
+To run
+----
+After running make to build the modules, Create to erlang nodes, one named foo:
+
+$ erl -sname foo
+
+and the other bar:
+
+$ erl -sname bar
+
+You may at this time need to edit the client_node.app file and add the
+appropriate hostname (see the prompt in the foo node for the correct hostname).
+It's currently set to foo@fawkes (the second argument is the name of the
+event queue gen_event manages).
+
+Now, in the bar node, load and run the application:
+
+(bar@fawkes)1> application:load(client_node).
+
+Then start it:
+
+(bar@fawkes)2> application:start(client_node).
+
+You'll see some debug printed to the screen.  Now, load the event descriptor
+record (you'll need this to send an event):
+
+(bar@fawkes)3> rr("event_descriptor.hrl").
+
+Now back at the foo node, start the command server:
+
+(foo@fawkes)1> command_server:start().
+
+Back at the bar node, send and event:
+
+(bar@fawkes)4> gen_event:notify(event_manager, #event_descriptor{originating_host=bar@fawkes, id=1, message="frankly"}).
+
+Back at foo, you should see something like this indicating the event was
+received:
+
+command_server delegating event...{event_descriptor,bar@fawkes,1,
+                                      {1283,653263,12500},
+                                      low,low,informational,"frankly"}
+command_handler handling event: {event_descriptor,bar@fawkes,1,
+                                    {1283,653263,12500},
+                                    low,low,informational,"frankly"}
+
+At this point you've demonstrated communication between the client node and the
+command node (though the command server is currently admittedly a shim module).
+
+Some of these commands are recorded in the scratch file for reuse.  Feel free
+to add to this file if needed, but don't delete.
+
+
+
+
+

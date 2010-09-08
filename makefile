@@ -14,7 +14,11 @@ MODS = client_node_engine \
 	remote_handler \
 	communication_server \
 	command_server \
-	command_handler
+	command_handler \
+  command_node_engine \
+  command_node_communication_server \
+  event_reception_server \
+  command_node_supervisor
 	
 all: compile
 

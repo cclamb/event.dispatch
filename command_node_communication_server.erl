@@ -1,7 +1,7 @@
 -module(command_node_communication_server).
 -include("command_descriptor.hrl").
 -behaviour(gen_server).
--export([start/0, stop/0, register/1, call/1]).
+-export([start/0, stop/0, call/1]).
 -export([init/1, handle_call/3, handle_cast/2, handle_info/2, terminate/2, code_change/3]).
 
 start() -> gen_server:start_link({local, ?MODULE}, ?MODULE, [], []).

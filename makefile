@@ -18,7 +18,8 @@ MODS = client_node_engine \
   command_node_engine \
   command_node_communication_server \
   event_reception_server \
-  command_node_supervisor
+  command_node_supervisor \
+  event_dispatch_server
 	
 all: compile
 

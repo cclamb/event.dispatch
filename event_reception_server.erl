@@ -15,6 +15,8 @@ init([]) ->
 
 handle_call(stop, _From, N) ->
 	io:format("*** stopping *** ~p~n", [?MODULE]),
+  % dispatch to event_dispatch_server
+  % dispatch to local handler
 	{stop, normal, stopped, N + 1}.
 
 handle_cast({call, Packet}, N) ->
